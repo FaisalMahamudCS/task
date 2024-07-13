@@ -18,7 +18,7 @@ This project is a Node.js application designed to read a CSV file containing pro
 2. **Install Dependencies**:
 
     npm install
-3. Create a `.env` file at the root of the project and add your PostgreSQL connection details:
+3. ** Create a `.env` file at the root of the project and add your PostgreSQL connection details **:
 
     ```plaintext
     DB_HOST=yourHost
