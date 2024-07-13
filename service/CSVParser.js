@@ -12,7 +12,7 @@ function CSVParser(filePath) {
                     code: row['Product Code'] ? row['Product Code'].trim() : null,
                     name: row['Product Name'] ? row['Product Name'].trim() : null,
                     description: row['Product Description'] ? row['Product Description'].trim() : null,
-                    stock: row['Stock'] ? parseInt(row['Stock'], 10) : null,
+                    stock: row['Stock'] ? parseInt(row['Stock'], 10) : 0,
                     price: row['Cost in GBP'] ? parseFloat(row['Cost in GBP'].replace(/[^0-9.]/g, '')) : null,
                     discontinued: row['Discontinued'] ? row['Discontinued'].trim() : 'no'
                 };
