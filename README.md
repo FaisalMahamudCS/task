@@ -59,13 +59,13 @@ This project is a Node.js application designed to read a CSV file containing pro
    Run the app:
    node index.js
     ```bash
-    node importer.js -f path/to/your/file.csv
+    node index.js -f path/to/your/file.csv
     ```
 
     To run in test mode:
 
     ```bash
-    node importer.js -t -f path/to/your/file.csv
+    node stock.js -t -f path/to/your/file.csv
     ```
 
 ## Import Rules
