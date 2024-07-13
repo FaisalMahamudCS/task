@@ -14,13 +14,13 @@ if (!options.file) {
     console.error('Please provide a path to the CSV file using -f or --file option');
     process.exit(1);
 }
-
 importProducts(options.file, options.test)
     .then((results) => {
         console.log('Import Summary:');
         console.log(`Processed: ${results.processed}`);
         console.log(`Successful: ${results.successful}`);
         console.log(`Skipped: ${results.skipped}`);
+        console.log(`Duplicates: ${results.duplicates}`);
         if (results.failed.length > 0) {
             console.log(`Failed: ${results.failed.length}`);
             console.log('Failed Entries:', results.failed);

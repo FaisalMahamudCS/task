@@ -1,7 +1,7 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
-function csvParser(filePath) {
+function CSVParser(filePath) {
     const products = [];
     return new Promise((resolve, reject) => {
         fs.createReadStream(filePath)
@@ -31,4 +31,4 @@ function csvParser(filePath) {
     });
 }
 
-module.exports = csvParser;
+module.exports = CSVParser;

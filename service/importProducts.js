@@ -2,12 +2,14 @@ const db = require('../connection/db');
 const parseCSV = require('./CSVParser');
 
 
+
 async function importProducts(filePath, testMode = false) {
     const products = await parseCSV(filePath);
     const results = {
         processed: 0,
         successful: 0,
         skipped: 0,
+        duplicates: 0,
         failed: []
     };
 
@@ -33,12 +35,16 @@ async function importProducts(filePath, testMode = false) {
         if (!testMode) {
             try {
                 await db.query(
-                    'INSERT INTO tblproductdata (strproductname, strproductdesc, strproductcode, dtmadded, dtmdiscontinued) VALUES ($1, $2, $3, $4, $5)',
-                    [product.name, product.description, product.code, new Date().toISOString().slice(0, 19).replace('T', ' '), product.dtmDiscontinued]
+                    'INSERT INTO tblproductdata (strproductname, strproductdesc, strproductcode, dtmadded, dtmdiscontinued, stock, price) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+                    [product.name, product.description, product.code, new Date().toISOString().slice(0, 19).replace('T', ' '), product.dtmDiscontinued, product.stock, product.price]
                 );
                 results.successful++;
             } catch (error) {
-                results.failed.push({ product, error });
+                if (error.detail && error.detail.includes('already exists')) {
+                    results.duplicates++;
+                } else {
+                    results.failed.push({ product, error });
+                }
             }
         } else {
             results.successful++; // Simulate successful insertion in test mode
